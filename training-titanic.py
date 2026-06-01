@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pandas as pd
 
 def clean_data(filepath):
@@ -22,8 +24,39 @@ def clean_data(filepath):
 
     return fpath
     
+df = pd.read_csv("cleaned.csv")
+numeric_df = df.select_dtypes(include=['number'])
+correlation = numeric_df.corr()
 
-df = clean_data("train.csv")
-print(df.isnull().sum())
-print(df.columns.tolist())
+sns.heatmap(correlation, annot=True, cmap='coolwarm')
+plt.title("Feature Correlation Matrix")
+plt.show()
 
+
+
+
+# survival_rate = df.groupby("Pclass")["Survived"].mean()
+# print(survival_rate)
+
+# survival_rate.plot(kind="bar")
+# plt.title("Survival Rate of passenger class")
+# plt.xlabel("Passenger class") 
+# plt.ylabel("Survival Rate")
+# plt.show()
+
+
+# df["Age"].plot(kind="hist", bins=20)
+# plt.title("Age Distribution")
+# plt.xlabel("Age")
+# plt.show()
+
+# df.groupby("Sex")["Survived"].mean().plot(kind="bar")
+# plt.title("Survival Rate by Sex")
+# plt.show()
+
+
+plt.scatter(df["Age"], df["Fare"], alpha=0.5)
+plt.title("Age vs Fare")
+plt.xlabel("Age")
+plt.ylabel("Fare")
+plt.show()
