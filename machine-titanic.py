@@ -55,10 +55,19 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 
 
 #K-nearest neigbour
-from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.neighbors import KNeighborsClassifier
 
-knn_model = KNeighborsClassifier(n_neighbors=53)
-knn_model.fit(x_train, y_train)
-knn_predictions = knn_model.predict(x_test)
-knn_accuracy = accuracy_score(y_test, knn_predictions)
-print(f"KNN Accuracy: {knn_accuracy:.2%}")
+# knn_model = KNeighborsClassifier(n_neighbors=53)
+# knn_model.fit(x_train, y_train)
+# knn_predictions = knn_model.predict(x_test)
+# knn_accuracy = accuracy_score(y_test, knn_predictions)
+# print(f"KNN Accuracy: {knn_accuracy:.2%}")
+
+#Cross Splitting
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(LogisticRegression(), x, y, cv=5)
+print(f"Individual scores: {scores}")
+print(f"Mean accuracy: {scores.mean():.2%}")
+print(f"Standard deviation: {scores.std():.2%}")
