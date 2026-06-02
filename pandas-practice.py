@@ -4,6 +4,7 @@ df = pd.read_csv("student.csv")
 # print()
 # print("SELECTING")
 # print()
+
 # #Selecting columns
 # print(df["grade"])
 # print(df[["name" , "grade"]])
